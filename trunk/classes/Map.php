@@ -10,7 +10,19 @@ class Map {
     }
 
     public function addSetting(Setting $setting){
-        array_push($this->_settings, $setting);
+        $this->_settings[$setting->getKey()] =  $setting;
+    }
+
+    public function getSetting($key){
+        return $this->_settings[$key];
+    }
+
+    public function hasSetting($key){
+        return array_key_exists($key, $this->_settings);
+    }
+
+    public function getSettingKeys(){
+        return array_keys($this->_settings);
     }
 
     public function addRange(Range $range){
@@ -19,6 +31,10 @@ class Map {
 
     public function getAbbreviation(){
         return $this->_abbreviation;
+    }
+
+    public function getRanges(){
+        return $this->_ranges;
     }
 }
 

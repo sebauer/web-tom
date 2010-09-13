@@ -12,15 +12,13 @@ define('_RANGES', 'Ranges');
 define('_RANGESCOUNT', 'RangesCount');
 
 $files = scandir(_DIRECTORY);
+$maps = array( );
 //var_dump($files);
 foreach($files as $file){
     if(strpos($file, '.2PF')===false)continue;
     $mapIni = parse_ini_file(_DIRECTORY.$file, true, INI_SCANNER_RAW);
 
     $map = new Map(str_replace('.2PF', '', $file));
-?>
-    <?=$map->getAbbreviation()?>: <select name="setting[<?=$map->getAbbreviation()?>]">
-<?php
 
     foreach($mapIni as $sectionName => $section){
         switch($sectionName){
@@ -36,9 +34,6 @@ foreach($files as $file){
                 break;
             default:
                 $setting = new Setting($sectionName, $section[_DESCRIPTION], $section[_LISTENTRY], array());
-?>
-                <option value="<?=$sectionName?>"><?=$section[_LISTENTRY]?></option>
-<?php
                 foreach($section as $key => $value){
                     if($key == _DESCRIPTION || $key == _LISTENTRY) continue;
 
@@ -50,9 +45,13 @@ foreach($files as $file){
                 break;
         }
     }
-?>
-    </select><br />
-<?php
+    $maps[] = $map;
 }
+$settingKeys = $maps[0]->getSettingKeys();
+$mod1 = new Modification($maps[0], $maps[0]->getSetting($settingKeys[1]));
 
-?>
+$patcher = new Patcher();
+$patcher->addModification($mod1);
+echo "<pre>";
+$patcher->createTunedFile(_DIRECTORY.'original.rom');
+echo "</pre>";

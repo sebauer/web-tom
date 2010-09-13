@@ -12,6 +12,18 @@ class Setting {
     }
 
     public function addValue(Value $value){
-        array_push($this->_values, $value);
+        $this->_values[$value->getOffset()] = $value;
+    }
+
+    public function hasValueAtOffset($offset){
+        return array_key_exists(strtoupper($offset), $this->_values);
+    }
+
+    public function getValue($offset){
+        return $this->_values[strtoupper($offset)];
+    }
+
+    public function getKey(){
+        return $this->_key;
     }
 }

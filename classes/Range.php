@@ -7,4 +7,12 @@ class Range {
         $this->_start = $start;
         $this->_end = $end;
     }
+
+    public function getStart(){
+        return $this->_start;
+    }
+
+    public function getEnd(){
+        return $this->_end;
+    }
 }

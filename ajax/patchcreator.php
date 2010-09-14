@@ -5,7 +5,7 @@
         <label for="original">Original File (371568):</label><input type="file" name="original" />
     </div>
     <div class="singleMap">
-        <label for="source">Datei zum Patchen (Basis 371568):</label><input type="file" name="source" />
+        <label for="source">Datei zum Patchen (Basis 371568):<br /><span class="labelInfo">Wenn leergelassen, wird Originaldatei verwendet.</span></label><input type="file" name="source" />
     </div>
 </fieldset>
 <fieldset>
@@ -85,4 +85,4 @@ foreach($files as $file){
     </div>
 </div>
 </form>
-<iframe name="uploadFrame" style="width: 100%;border: none;display: none;"></iframe>
+<iframe name="uploadFrame" style="width: 100%;border: none;"></iframe>

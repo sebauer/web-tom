@@ -30,7 +30,7 @@ class Patcher {
 
         // Create a temporary output file and open it in binary write mode
         // We'll create a copy of the source file which will then be modified
-        $targetFileName = 'tmp'.md5($sourceFilePath).date('YmdHi').'.bin';
+        $targetFileName = 'generated/tmp'.md5($sourceFilePath).date('YmdHi').'.bin';
         copy($sourceFilePath, $targetFileName);
         $this->_patchedFile = fopen($targetFileName, 'r+b');
 
@@ -47,6 +47,8 @@ class Patcher {
         // And close..
         fclose($this->_originalFile);
         fclose($this->_patchedFile);
+
+        return $targetFileName;
     }
 
     /**

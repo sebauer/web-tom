@@ -27,6 +27,11 @@
                     autoOpen: false,
                     modal: true
                 });
+                $('#downloadDialog').dialog({
+                    autoOpen: false,
+                    modal: true,
+                    minWidth: 450
+                });
                 $("button").button();
             });
             
@@ -37,6 +42,14 @@
                     alert(message);
                 }
                 
+            }
+            
+            var showDownloadInfo = function(filepath, filename, md5){
+                alert(filepath+';'+filename+';'+md5);
+                $('#md5').html(md5);
+                $('#filename').html(filename);
+                $('#downloadlink').html('<a href="'+filepath+'">Click</a>');
+                $('#downloadDialog').dialog('open');         
             }
             
             var showDisclaimer = function(){
@@ -117,6 +130,14 @@
                 den oben genannten Verwendungszweck des erstellten Tuningfiles sowie den Haftungsausschluss.
             </p>
             <button onclick="$('#patchCreatorForm').submit();$('#disclaimerDialog').dialog('close');">OK</button> <button onclick="$('#disclaimerDialog').dialog('close');">Abbrechen</button>
+        </div>
+        <div id="downloadDialog" title="Tuningfile herunterladen">
+            <p>Das erstellte Tuningfile wurde erfolgreich erstellt und kann nun heruntergeladen werden.</p>
+            <p>
+                <strong>MD5 Hash:</strong> <span id="md5"></span><br />
+                <strong>Dateiname:</strong> <span id="filename"></span><br />
+                <strong>Downloadlink:</strong> <span id="downloadlink"></span>
+            </p>
         </div>
     </body>
 </html>

@@ -14,6 +14,10 @@ function jsCallback($message, $isError = 'false'){
     echo "<script>window.parent.uploadCallback(\"{$message}\", {$isError});</script>";
 }
 
+function downloadFile($filepath, $filename, $md5){
+    echo "<script>window.parent.showDownloadInfo(\"{$filepath}\", \"{$filename}\", \"{$md5}\");</script>";
+}
+
 function getAvailableMaps(){
     $files = scandir(_DIRECTORY);
     $maps = array( );
@@ -80,5 +84,6 @@ if($patcher->getNumberOfModifications() == 0){
     jsCallback('Keine Änderungen vorgenommen!');
     die();
 }
-$patcher->createTunedFile($sourceFile, $originalFile);
+$filename = $patcher->createTunedFile($sourceFile, $originalFile);
+downloadFile($filename, basename($filename), md5_file($filename));
 ?>

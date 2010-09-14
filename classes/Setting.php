@@ -26,4 +26,12 @@ class Setting {
     public function getKey(){
         return $this->_key;
     }
+    
+    public function getDescription(){
+    	return $this->_description;
+    }
+    
+    public function getListEntry(){
+    	return $this->_listEntry;
+    }
 }

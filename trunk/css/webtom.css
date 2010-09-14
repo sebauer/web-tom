@@ -69,3 +69,8 @@ input[type="file"] {
 input[type="checkbox"] {
     margin-right: 10px;
 }
+
+.labelInfo {
+    font-style: italic;
+    font-size: 10px;
+}

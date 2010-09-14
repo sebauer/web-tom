@@ -57,17 +57,21 @@ function getAvailableMaps(){
     return $maps;
 }
 
-$originalFile = _ORIGINALUPLOAD.'tmp'.md5($sourceFilePath).date('YmdHi').'.bin';
-$sourceFile = _SOURCEUPLOAD.'tmp'.md5($sourceFilePath).date('YmdHi').'.bin';
-
-if(!array_key_exists('original', $_FILES)){
+if($_FILES['original']['tmp_name'] == ''){
     jsCallback('Es wurde keine Originaldatei mit hochgeladen!', true);
     die();
 }
 
-if(!move_uploaded_file($_FILES['original']['tmp_name'], $originalFile) || !move_uploaded_file($_FILES['source']['tmp_name'], $sourceFile)){
+$originalFile = _ORIGINALUPLOAD.'tmp'.md5($_FILES['original']['name'].date('YmdHi')).'.bin';
+$sourceFile = _SOURCEUPLOAD.'tmp'.md5($_FILES['original']['name'].date('YmdHi')).'.bin';
+
+if(!move_uploaded_file($_FILES['original']['tmp_name'], $originalFile) || $_FILES['source']['tmp_name'] != '' && !move_uploaded_file($_FILES['source']['tmp_name'], $sourceFile)){
     jsCallback('Dateiuploads konnten nicht verarbeitet werden!', true);
     die();
+}
+
+if($_FILES['source']['tmp_name'] == ''){
+    copy($originalFile, $sourceFile);
 }
 
 $maps = getAvailableMaps();

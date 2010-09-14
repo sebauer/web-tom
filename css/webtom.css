@@ -1,0 +1,71 @@
+body {
+    background: url(../img/20.gif);
+    font-size: 11px;
+}
+
+#header {
+    top: -50;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(../img/WebTune-O-Matic.png) no-repeat fixed center -30px;
+    height: 159px;
+    width: 770px;
+}
+
+#tabs {
+    width: 700px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.singleMap label {
+    float: left;
+    clear: both;
+    width: 350px;
+}
+
+#tabs select {
+    width: 150px;
+    border: 1px solid black;
+    margin-left: 50px;
+}
+
+option {
+}
+
+.singleMap {
+    margin: 10px;
+}
+
+#patchCreatorContent {
+    height: 590px;
+    overflow: auto;
+    margin-bottom: 15px;
+}
+#patchCreatorForm {
+    height: 630px;
+}
+
+fieldset {
+    border: 1px solid #333333;
+    margin: 5px;
+}
+
+input[type="file"] {
+    color: white;
+    background-color: black;
+    border: none;
+}
+
+#disclaimerDialog{
+    text-align: justify;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}

@@ -85,4 +85,4 @@ foreach($files as $file){
     </div>
 </div>
 </form>
-<iframe name="uploadFrame" style="width: 100%;border: none;"></iframe>
+<iframe name="uploadFrame" style="width: 100%;border: none;display: none;"></iframe>

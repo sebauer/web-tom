@@ -19,12 +19,12 @@ class Patcher {
      * @return void
      */
     public function createTunedFile($sourceFilePath, $originalFilePath){
-    	
+
     	// Check if the original file matches the proper one
     	if(md5_file($originalFilePath)!='2e63a949d99dc19f62c36b43cb28d94e'){
     		throw new Exception('MD5 Checksum of original file incorrect!');
     	}
-    	
+
     	// Open the original file read only
         $this->_originalFile = fopen($originalFilePath, 'r');
 
@@ -50,11 +50,18 @@ class Patcher {
     }
 
     /**
+     * @return number
+     */
+    public function getNumberOfModifications(){
+        return count($this->_modifications);
+    }
+
+    /**
      * @param Modification $mod
      * @return void
      */
     private function applyModification(Modification $mod){
-    	
+
     	// First get the map for this modification
         $map = $mod->getMap();
         // Get the selected setting
@@ -63,7 +70,7 @@ class Patcher {
         // Get all ranges and iterate through them
         $ranges = $map->getRanges();
         foreach($ranges as $range){
-        	
+
         	// Define start and end of the range
             $rangeStart = hexdec($range->getStart());
             $rangeEnd = hexdec($range->getEnd());
@@ -73,7 +80,7 @@ class Patcher {
 
             	// Hex represantation of our decimal offset
                 $hexOffset = dechex($offset);
-                
+
                 // Seek to offset position
                 fseek($this->_patchedFile, $offset);
 

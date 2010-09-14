@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>WebTOM - Web-based Tune-O-Matic (powered by 2eck)</title>
+        <link rel="stylesheet" href="css/ui-darkness/jquery-ui-1.8.4.custom.css" type="text/css" />
+        <link rel="stylesheet" href="css/webtom.css" type="text/css" />
+        <script type="text/javascript" src="js/jquery-1.4.2.min.js">
+        </script>
+        <script type="application/javascript" src="js/jquery-ui-1.8.4.custom.min.js">
+        </script>
+    </head>
+    <body>
+        <div id="header">
+        </div>
+        <script type="text/javascript">
+            $(function(){
+                $("#tabs").tabs({
+                    ajaxOptions: {
+                        error: function(xhr, status, index, anchor){
+                            $(anchor.hash).html("Tab konnte nicht geladen werden..");
+                        }
+                    }
+                });
+                $('#disclaimerDialog').dialog({
+                    autoOpen: false,
+                    modal: true
+                });
+                $("button").button();
+            });
+            
+            var uploadCallback = function(message, isError){
+                if (isError == 1) {
+                    alert('ERROR: ' + message);
+                } else {
+                    alert(message);
+                }
+                
+            }
+            
+            var showDisclaimer = function(){
+                $('#disclaimerDialog').dialog('open');
+            }
+        </script>
+        <div id="tabs">
+            <ul>
+                <li>
+                    <a href="ajax/patchcreator.php">File Patcher</a>
+                </li>
+                <li>
+                    <a href="#tabs-2">Patch Creator</a>
+                </li>
+                <li>
+                    <a href="#tabs-3">Über WebTune-O-Matic</a>
+                </li>
+            </ul>
+            <div id="tabs-1" class="tabContent">
+            </div>
+            <div id="tabs-2" class="tabContent">
+                n/a
+            </div>
+            <div id="tabs-3" class="tabContent">
+                <h2>Versionsinfo</h2>
+                <p>web-tom Version 0.1.0</p>
+                
+                <h2>Über</h2>
+                <p>Der WebTune-O-Matic ist eine web-basierte Version des Tune-O-Matics von Thomas "2eck" Drechsler.
+                </p>
+                
+                <h2>Haftungsausschluss</h2>
+                <p>
+                    <strong>WARNUNG:</strong> Das erstellte Tuningfile hat keine korrekten Checksummen
+                    Falls das File ohne nachfolgende Korrektur der Checksummen in das Motorsteuergerät
+                    geschrieben wird, wird das Steuergerät das File nicht anerkennen!!!
+                    Das Auto wird NICHT MEHR STARTEN und das Motorsteuergerät muss wiederbelebt oder
+                    ausgetauscht werden!!!
+                </p>
+                <p>
+                    Das erstellte Tuningfile dient ausschliesslich Demonstrationszwecken und ist keinesfalls
+                    dazu bestimmt in ein Motorsteuergerät geschrieben und in Betrieb genommen zu werden!!!
+                </p>
+                <p>
+                    Der Autor dieses Programms haftet nicht für Schäden die durch eine bestimmungswiedrige
+                    Verwendung des erstellten Tuningfiles entstehen
+                </p>
+                <p>
+                    Mit dem Anklicken erstellen eines Tuningfiles und dem Bestätigen des OK Buttons im Dialog
+                    für den Haftungsausschluss, akzeptiert der Benutzer dieses Programms
+                    den oben genannten Verwendungszweck des erstellten Tuningfiles sowie den Haftungsausschluss.
+                </p>
+                
+                <h2>Kontakt & Support</h2>
+                <p>
+                    Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a><br />
+                </p>
+            </div>
+        </div>
+        <div id="disclaimerDialog" title="Haftungsausschluss">
+            <p>
+                <strong>WARNUNG:</strong> Das erstellte Tuningfile hat keine korrekten Checksummen
+                Falls das File ohne nachfolgende Korrektur der Checksummen in das Motorsteuergerät
+                geschrieben wird, wird das Steuergerät das File nicht anerkennen!!!
+                Das Auto wird NICHT MEHR STARTEN und das Motorsteuergerät muss wiederbelebt oder
+                ausgetauscht werden!!!
+            </p>
+            <p>
+                Das erstellte Tuningfile dient ausschliesslich Demonstrationszwecken und ist keinesfalls
+                dazu bestimmt in ein Motorsteuergerät geschrieben und in Betrieb genommen zu werden!!!
+            </p>
+            <p>
+                Der Autor dieses Programms haftet nicht für Schäden die durch eine bestimmungswiedrige
+                Verwendung des erstellten Tuningfiles entstehen
+            </p>
+            <p>
+                Mit dem Anklicken des OK Buttons in diesem Dialog akzeptiert der Benutzer dieses Programms
+                den oben genannten Verwendungszweck des erstellten Tuningfiles sowie den Haftungsausschluss.
+            </p>
+            <button onclick="$('#patchCreatorForm').submit();$('#disclaimerDialog').dialog('close');">OK</button> <button onclick="$('#disclaimerDialog').dialog('close');">Abbrechen</button>
+        </div>
+    </body>
+</html>

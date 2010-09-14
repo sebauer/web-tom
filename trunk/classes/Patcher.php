@@ -1,7 +1,7 @@
 <?php
 class Patcher {
 
-    private $_sourceFile;
+    private $_originalFile;
     private $_patchedFile;
     private $_modifications = array( );
 
@@ -9,13 +9,16 @@ class Patcher {
         array_push($this->_modifications, $mod);
     }
 
-    public function createTunedFile($sourceFilePath){
-        $this->_sourceFile = fopen($sourceFilePath, 'r');
+    public function createTunedFile($sourceFilePath, $originalFilePath){
+    	if(md5_file($originalFilePath)!='2e63a949d99dc19f62c36b43cb28d94e'){
+    		throw new Exception('MD5 Checksum of original file incorrect!');
+    	}
+        $this->_originalFile = fopen($originalFilePath, 'r');
 
         $targetFileName = 'tmp'.md5($sourceFilePath).date('YmdHi').'.bin';
 
         copy($sourceFilePath, $targetFileName);
-        $this->_patchedFile = fopen($targetFileName, 'r+');
+        $this->_patchedFile = fopen($targetFileName, 'r+b');
 
         if(count($this->_modifications) == 0){
             throw new Exception('No modifications given');
@@ -25,13 +28,12 @@ class Patcher {
             $this->applyModification($mod);
         }
 
-        fclose($this->_sourceFile);
+        fclose($this->_originalFile);
         fclose($this->_patchedFile);
     }
 
     private function applyModification(Modification $mod){
         $map = $mod->getMap();
-        var_dump($map->getAbbreviation());
         $setting = $mod->getSetting();
 
         $ranges = $map->getRanges();
@@ -46,9 +48,12 @@ class Patcher {
                 fseek($this->_patchedFile, $offset);
 
                 if($setting->hasValueAtOffset($hexOffset)){
-                    fwrite($this->_patchedFile, $setting->getValue($hexOffset)->getValue());
+                	$value = $setting->getValue($hexOffset);
+                    fwrite($this->_patchedFile, pack('H*', $setting->getValue($hexOffset)->getValue()));
+                    continue;
                 }
-                var_dump($hexOffset);
+                fseek($this->_originalFile, $offset);
+                fwrite($this->_patchedFile, fread($this->_originalFile, 1));
             }
         }
     }

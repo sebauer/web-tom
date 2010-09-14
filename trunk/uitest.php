@@ -15,7 +15,16 @@ $files = scandir(_DIRECTORY);
 //var_dump($files);
 foreach($files as $file){
     if(strpos($file, '.2PF')===false)continue;
+    
+    ob_start();
     $mapIni = parse_ini_file(_DIRECTORY.$file, true, INI_SCANNER_RAW);
+    $output = ob_get_clean();
+    ob_end_flush();
+    
+    if(!$mapIni){
+    	echo '<span style="color: red;">Failed loading '.$file.': '.$output.'</span><br />';
+    	continue;
+    }
 
     $map = new Map(str_replace('.2PF', '', $file));
 ?>

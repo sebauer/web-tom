@@ -53,5 +53,5 @@ $mod1 = new Modification($maps[0], $maps[0]->getSetting($settingKeys[1]));
 $patcher = new Patcher();
 $patcher->addModification($mod1);
 echo "<pre>";
-$patcher->createTunedFile(_DIRECTORY.'original.rom');
+$patcher->createTunedFile(_DIRECTORY.'original.rom', _DIRECTORY.'original.rom');
 echo "</pre>";

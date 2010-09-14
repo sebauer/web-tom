@@ -1,5 +1,6 @@
 <?php
 require_once('autoload.php');
+require_once('parse_ini_string.php');
 
 define('_DIRECTORY', './R60_2005/');
 

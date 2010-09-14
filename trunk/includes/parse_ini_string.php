@@ -19,6 +19,7 @@ if(!function_exists('parse_ini_string')){
                 continue;
             
             $tmp = explode("=", $line, 2);
+            $tmp[1] = substr($tmp[1], 1, strlen($tmp[1])-2);
             if($ProcessSections && $inSect)
                 $return[$inSect][trim($tmp[0])] = ltrim($tmp[1]);
             else

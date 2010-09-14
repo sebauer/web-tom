@@ -19,7 +19,7 @@ foreach($files as $file){
     if(strpos($file, '.2PF')===false)continue;
 
     ob_start();
-    $mapIni = parse_ini_file(_DIRECTORY.$file, true, INI_SCANNER_RAW);
+    $mapIni = parse_ini_file(_DIRECTORY.$file, true);
     $output = ob_get_clean();
     ob_end_flush();
 

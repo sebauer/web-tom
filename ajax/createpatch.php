@@ -23,7 +23,7 @@ function getAvailableMaps(){
     $maps = array( );
     foreach($files as $file){
         if(strpos($file, '.2PF')===false)continue;
-        $mapIni = parse_ini_file(_DIRECTORY.$file, true, INI_SCANNER_RAW);
+        $mapIni = parse_ini_string(preg_replace("/\=(.+)\r/", "=\"$1\"\r", file_get_contents(_DIRECTORY.$file)), true);
 
         $map = new Map(str_replace('.2PF', '', $file));
 

@@ -4,6 +4,7 @@ class Map {
     private $_abbreviation;
     private $_settings = array();
     private $_ranges = array();
+    private $_group;
 
     /**
      * @param string $abbreviation
@@ -11,6 +12,21 @@ class Map {
      */
     public function __construct($abbreviation) {
         $this->_abbreviation = $abbreviation;
+    }
+
+    /**
+     * @param string $groupName
+     * @return void
+     */
+    public function setGroup($groupName){
+        $this->_group = $groupName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGroup(){
+        return $this->_group;
     }
 
     /**
@@ -48,6 +64,11 @@ class Map {
      * @return Setting[]
      */
     public function getSettings(){
+        /**
+         * FIXME This must be changed to a REAL hex-compatible
+         * sorting method, since settings are numbered hex (0-F)
+         */
+        ksort($this->_settings, SORT_STRING);
         return $this->_settings;
     }
 

@@ -19,6 +19,33 @@ class PatchLocator {
     }
 
     /**
+     * @param string $model
+     * @return array
+     */
+    public static function getMapsGrouped($model){
+        return self::groupMapsArraybyGroup(self::getMapsFromDirectory(_PATCHESDIR.$model.DIRECTORY_SEPARATOR));
+    }
+
+    /**
+     * Groups the given array of maps by their groups.
+     *
+     * @param array $maps
+     * @return array
+     */
+    public static function groupMapsArraybyGroup($maps){
+        $groups = array( );
+        foreach($maps as $key => $map) {
+            $groupname = $map->getGroup();
+            if($groupname!=''){
+                $groups[$groupname][$key] = $map;
+                continue;
+            }
+            $groups['none'][$key] = $map;
+        }
+        return $groups;
+    }
+
+    /**
      * @param string $directory
      * @return Map[]
      */
@@ -37,6 +64,11 @@ class PatchLocator {
 
             foreach($mapIni as $sectionName => $section){
                 switch($sectionName){
+                    case _FEATURES:
+                        if(array_key_exists(_GROUP, $section)){
+                            $map->setGroup($section[_GROUP]);
+                        }
+                        break;
                     case _RANGES:
                         $rangesCount = $section[_RANGESCOUNT];
                         for($i=1; $i <= $rangesCount; $i++){

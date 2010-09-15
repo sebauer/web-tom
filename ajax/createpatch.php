@@ -50,6 +50,15 @@ foreach($_POST['setting'] as $mapName => $settingVal){
     $mod = new Modification($maps[$mapName], $maps[$mapName]->getSetting($settingVal));
     $patcher->addModification($mod);
 }
+$presetString = '';
+$presetMap = _PRESET_MAPPING();
+foreach($presetMap as $preset){
+	if(!array_key_exists($preset, $_POST['setting'])) {
+		$presetString = '';
+		break;
+	}
+	$presetString .= str_replace($preset, '', $_POST['setting'][$preset]);
+}
 
 if($patcher->getNumberOfModifications() == 0){
     jsCallback('Keine Änderungen vorgenommen!');
@@ -63,7 +72,7 @@ foreach($staticMaps as $mapName => $map){
 }
 
 $filename = $patcher->createTunedFile($sourceFile, $originalFile);
-$newFilename = str_replace(basename($filename),'',$filename).'R60_2005-'.$requestId.'.Bad Checksums!!';
+$newFilename = str_replace(basename($filename),'',$filename).'R60_2005-'.$presetString.'-'.$requestId.'.Bad Checksums!!';
 
 rename($filename, $newFilename);
 downloadFile($newFilename, basename($newFilename), md5_file($newFilename));

@@ -37,7 +37,7 @@ class Patcher {
     public function createTunedFile($sourceFilePath, $originalFilePath){
 
     	// Check if the original file matches the proper one
-    	if(md5_file($originalFilePath)!='2e63a949d99dc19f62c36b43cb28d94e'){
+    	if(md5_file($originalFilePath)!=_ORIGINAL_MD5){
     		throw new Exception('MD5 Checksum of original file incorrect!');
     	}
 

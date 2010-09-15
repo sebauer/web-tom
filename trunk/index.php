@@ -154,7 +154,7 @@
                 <div style="float: left;margin-left: 10px;">
                     <h2>Versionsinfo</h2>
                     <p>
-                        WebTune-O-Matic, web-tom<br /><strong>Version <?=_VERSION?></strong><br /><br />
+                        WebTune-O-Matic, web-tom<br /><strong>Version <?=_VERSION?> (Rev. <?=_REVISION?>)</strong><br /><br />
                         Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a>
                     </p>
                 </div>

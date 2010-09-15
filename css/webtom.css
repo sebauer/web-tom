@@ -46,6 +46,7 @@ option {
 }
 
 .tabContent {
+    margin-top: 3px;
     height: 600px;
     overflow: auto;
     margin-bottom: 50px;

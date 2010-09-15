@@ -17,13 +17,16 @@ $mapGroups = PatchLocator::getMapsGrouped('R60_2005');
 
 /* @var Map $map */
 foreach($mapGroups as $groupname => $maps){
-    $groupname = htmlentities($groupname);
-    if($groupname == ''){
-        $groupname = 'Sonstiges';
-    }
     ?>
     <fieldset>
-    <legend><?=$groupname?></legend>
+    <?php
+    $groupname = htmlentities($groupname);
+    if($groupname != 'none'){
+       ?>
+        <legend><?=$groupname?></legend>
+       <?php
+    }
+    ?>
     <?php
     foreach($maps as $map){
         $settings = $map->getSettings();

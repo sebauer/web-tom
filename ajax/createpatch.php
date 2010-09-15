@@ -35,6 +35,11 @@ if($_FILES['source']['tmp_name'] == ''){
     copy($originalFile, $sourceFile);
 }
 
+if(Patcher::checkForScottyFile($sourceFile)){
+    jsCallback('Dies ist ein File von Scotty und ist nicht für Patches freigegeben!');
+    die();
+}
+
 $maps = PatchLocator::getMaps('R60_2005');
 $patcher = new Patcher();
 

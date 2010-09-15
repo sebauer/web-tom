@@ -1,5 +1,3 @@
-<form enctype="multipart/form-data" method="post" action="ajax/createpatch.php" id="patchCreatorForm" target="uploadFrame">
-<div id="patchCreatorContent">
 <fieldset>
     <legend>Quelldateien</legend>
     <div class="singleMap">
@@ -51,19 +49,3 @@ foreach($mapGroups as $groupname => $maps){
 }
 
 ?>
-</div>
-<script type="text/javascript">
-    $(function() {
-        $("button").button();
-    });
-</script>
-<div id="patchCreateFooter">
-    <div style="float: left;">
-        <button onclick="showDisclaimer();return false;">Tuning File erstellen</button>
-    </div>
-    <div style="float: left;margin-left: 30px;">
-        <label for="overwriteOriginal"><input type="checkbox" id="overwriteOriginal" name="overwriteOriginal" value="1" /> Auf original stehendes mit Original überschreiben</label>
-    </div>
-</div>
-</form>
-<iframe name="uploadFrame" style="width: 100%;border: none;display: none;"></iframe>

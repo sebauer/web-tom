@@ -9,7 +9,7 @@ require_once('autoload.php');
 require_once('config.php');
 require_once('parse_ini_string.php');
 
-define('_VERSION', '0.8.1');
+define('_VERSION', '0.8.3');
 
 define('_DIRECTORY', './patches/tom/R60_2005/');
 

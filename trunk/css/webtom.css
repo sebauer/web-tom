@@ -74,3 +74,7 @@ input[type="checkbox"] {
     font-style: italic;
     font-size: 10px;
 }
+
+legend {
+    color: #aaaaaa;
+}

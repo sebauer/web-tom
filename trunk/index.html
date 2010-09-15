@@ -25,6 +25,7 @@
                 });
                 $('#disclaimerDialog').dialog({
                     autoOpen: false,
+                    minWidth: 450,
                     modal: true
                 });
                 $('#downloadDialog').dialog({
@@ -75,15 +76,27 @@
             </div>
             <div id="tabs-3" class="tabContent">
                 <h2>Versionsinfo</h2>
-                <p>web-tom Version 0.7.0</p>
+                <p>web-tom Version 0.7.1</p>
                 
                 <h2>Über</h2>
-                <p>Der WebTune-O-Matic ist eine web-basierte Version des Tune-O-Matics von Thomas "2eck" Drechsler.
+                <p>Der WebTune-O-Matic ist eine web-basierte Version des Tune-O-Matics von Thomas "2eck" Drechsler.</p>
+                <p>WebTOM benötigt die gleichen .2PF-Patchfiles, wie sie auch der Tune-O-Matic verwendet.
+                </p>
+                <p>Zudem wird ein Originaldatenstand des jeweiligen Steuergerätes benötigt, welcher aus
+                urheberrechtlichen Gründen nicht mitgeliefert werden darf.</p>
+                <p>
+                    2PF-Files ab TOM Version 1.08 sind mit dem WebTOM getestet und verifiziert!
+                </p>
+                <p>
+                    <strong>WARNUNG:</strong> Auch wenn - oder gerade weil - der WebTOM eine einfache "Klickibunti"
+                    Oberfläche ist, um Tuningfiles zusammenzubauen, sollte der Benutzer ganz genau wissen, was er da
+                    tut. Es gibt keine Plausibilitätsprüfung, welche unterschiedlichste Kennfeldkombinationen auf
+                    deren garantierte Kompatibilität prüft. 
                 </p>
                 
                 <h2>Haftungsausschluss</h2>
                 <p>
-                    <strong>WARNUNG:</strong> Das erstellte Tuningfile hat keine korrekten Checksummen
+                    <strong>WARNUNG:</strong> Das erstellte Tuningfile hat keine korrekten Checksummen!
                     Falls das File ohne nachfolgende Korrektur der Checksummen in das Motorsteuergerät
                     geschrieben wird, wird das Steuergerät das File nicht anerkennen!!!
                     Das Auto wird NICHT MEHR STARTEN und das Motorsteuergerät muss wiederbelebt oder
@@ -94,24 +107,34 @@
                     dazu bestimmt in ein Motorsteuergerät geschrieben und in Betrieb genommen zu werden!!!
                 </p>
                 <p>
-                    Der Autor dieses Programms haftet nicht für Schäden die durch eine bestimmungswiedrige
-                    Verwendung des erstellten Tuningfiles entstehen
+                    Dem Benutzer ist bekannt, dass der Einsatz eines erstellten Tuningfiles zum Erlöschen
+                    der allgemeinen Betriebserlaubnis führt. Dies hat die Konsequenz, dass das so veränderte
+                    Fahrzeug nicht im öffentlichen Straßenverkehr benutzt werden darf. Ebenfalls ist dem
+                    Benutzer bekannt, dass ohne allgemeine Betriebserlaubnis auch kein Versicherungsschutz besteht
+                    und sich durch das Abrufen der Mehrleistung der Verschleiß der Fahrzeugteile erhöht.
                 </p>
                 <p>
-                    Mit dem Anklicken erstellen eines Tuningfiles und dem Bestätigen des OK Buttons im Dialog
-                    für den Haftungsausschluss, akzeptiert der Benutzer dieses Programms
-                    den oben genannten Verwendungszweck des erstellten Tuningfiles sowie den Haftungsausschluss.
+                    Der Autor dieses Programms haftet nicht für Schäden, die beim Fahrzeugbetrieb eines durch
+                    ein hier erstelltes Tuningfile veränderten Fahrzeuges ohne Allgemeine Betriebserlaubnis
+                    und/oder ohne Versicherungsschutz entstehen.
+                </p>
+                <p>
+                    Durch das Aufspielen eines Tuningfiles erlöschen Herstellergarantie und jegliche Gewährleistungsansprüche
+                    in Bezug auf das veränderte Fahrzeug. Hierfür kann der Autor dieser Software nicht haftbar gemacht werden!
+                </p>
+                <p>
+                    Mit dem Erstellen eines Tuningfiles und dem Akzeptieren des Haftungsausschluss, bestätigt der Benutzer
+                    dieses Programms den oben genannten Verwendungszweck des erstellten Tuningfiles.
                 </p>
                 
                 <h2>Kontakt & Support</h2>
-                <p>
-                    Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a><br />
+                <p>Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a><br /><br /><br />&nbsp;
                 </p>
             </div>
         </div>
         <div id="disclaimerDialog" title="Haftungsausschluss">
             <p>
-                <strong>WARNUNG:</strong> Das erstellte Tuningfile hat keine korrekten Checksummen
+                <strong>WARNUNG:</strong> Das erstellte Tuningfile hat keine korrekten Checksummen!
                 Falls das File ohne nachfolgende Korrektur der Checksummen in das Motorsteuergerät
                 geschrieben wird, wird das Steuergerät das File nicht anerkennen!!!
                 Das Auto wird NICHT MEHR STARTEN und das Motorsteuergerät muss wiederbelebt oder
@@ -122,14 +145,26 @@
                 dazu bestimmt in ein Motorsteuergerät geschrieben und in Betrieb genommen zu werden!!!
             </p>
             <p>
-                Der Autor dieses Programms haftet nicht für Schäden die durch eine bestimmungswiedrige
-                Verwendung des erstellten Tuningfiles entstehen
+                Dem Benutzer ist bekannt, dass der Einsatz eines erstellten Tuningfiles zum Erlöschen
+                der allgemeinen Betriebserlaubnis führt. Dies hat die Konsequenz, dass das so veränderte
+                Fahrzeug nicht im öffentlichen Straßenverkehr benutzt werden darf. Ebenfalls ist dem
+                Benutzer bekannt, dass ohne allgemeine Betriebserlaubnis auch kein Versicherungsschutz besteht
+                und sich durch das Abrufen der Mehrleistung der Verschleiß der Fahrzeugteile erhöht.
             </p>
             <p>
-                Mit dem Anklicken des OK Buttons in diesem Dialog akzeptiert der Benutzer dieses Programms
-                den oben genannten Verwendungszweck des erstellten Tuningfiles sowie den Haftungsausschluss.
+                Der Autor dieses Programms haftet nicht für Schäden, die beim Fahrzeugbetrieb eines durch
+                ein hier erstelltes Tuningfile veränderten Fahrzeuges ohne Allgemeine Betriebserlaubnis
+                und/oder ohne Versicherungsschutz entstehen.
             </p>
-            <button onclick="$('#patchCreatorForm').submit();$('#disclaimerDialog').dialog('close');">OK</button> <button onclick="$('#disclaimerDialog').dialog('close');">Abbrechen</button>
+            <p>
+                Durch das Aufspielen eines Tuningfiles erlöschen Herstellergarantie und jegliche Gewährleistungsansprüche
+                in Bezug auf das veränderte Fahrzeug. Hierfür kann der Autor dieser Software nicht haftbar gemacht werden!
+            </p>
+            <p>
+                Mit dem Erstellen eines Tuningfiles und dem Akzeptieren des Haftungsausschluss, bestätigt der Benutzer
+                dieses Programms den oben genannten Verwendungszweck des erstellten Tuningfiles.
+            </p>
+            <button onclick="$('#patchCreatorForm').submit();$('#disclaimerDialog').dialog('close');">Ich akzeptiere den Haftungsausschluss</button> <button onclick="$('#disclaimerDialog').dialog('close');">Abbrechen</button>
         </div>
         <div id="downloadDialog" title="Tuningfile herunterladen">
             <p>Das gewählte Tuningfile wurde erfolgreich erstellt und kann nun heruntergeladen werden.</p>

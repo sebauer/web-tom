@@ -1,6 +1,7 @@
 <form enctype="multipart/form-data" method="post" action="ajax/createpatch.php" id="patchCreatorForm" target="uploadFrame">
 <div id="patchCreatorContent">
 <fieldset>
+    <legend>Quelldateien</legend>
     <div class="singleMap">
         <label for="original">Original File (371568):</label><input type="file" name="original" />
     </div>

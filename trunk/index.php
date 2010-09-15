@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -69,7 +68,7 @@
         <div id="tabs">
             <ul>
                 <li>
-                    <a href="ajax/patchcreator.php">File Patcher</a>
+                    <a href="#tabs-1">File Patcher</a>
                 </li>
                 <li>
                     <a href="#tabs-2">Patch Creator</a>
@@ -79,15 +78,88 @@
                 </li>
             </ul>
             <div id="tabs-1" class="tabContent">
+                <form enctype="multipart/form-data" method="post" action="ajax/createpatch.php" id="patchCreatorForm" target="uploadFrame">
+                    <fieldset>
+                        <legend>Quelldateien</legend>
+                        <div class="singleMap">
+                            <label for="original">Original File (371568):</label><input type="file" name="original" />
+                        </div>
+                        <div class="singleMap">
+                            <label for="source">Datei zum Patchen (Basis 371568):<br /><span class="labelInfo">Wenn leergelassen, wird Originaldatei verwendet.</span></label><input type="file" name="source" />
+                        </div>
+                    </fieldset>
+                    <?php
+                        require_once('includes/bootstrap.php');
+                        
+                        $mapGroups = PatchLocator::getMapsGrouped('R60_2005');
+                        
+                        /* @var Map $map */
+                        foreach($mapGroups as $groupname => $maps){
+                    ?>
+                    <fieldset>
+                    <?php
+                        $groupname = htmlentities($groupname);
+                        if($groupname != 'none'){
+                           ?>
+                            <legend><?=$groupname?></legend>
+                           <?php
+                        }
+                    ?>
+                    <?php
+                        foreach($maps as $map){
+                            $settings = $map->getSettings();
+                            ?>
+                        <div class="singleMap"><label
+                            for="setting[<?=$map->getAbbreviation()?>]"><?=htmlentities(reset($settings)->getDescription())?>:</label><select
+                            name="setting[<?=$map->getAbbreviation()?>]">
+                            <?php
+                                foreach($settings as $settingName => $setting){
+                                            ?>
+                                            <option value="<?=$settingName?>"><?=htmlentities($setting->getListEntry())?></option>
+                                            <?php
+                                }
+                            ?>
+                            </select>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    </fieldset>
+                    <?php
+                }
+                
+                ?>
+                <script type="text/javascript">
+                    $(function() {
+                        $("button").button();
+                    });
+                </script>
+                <div id="patchCreateFooter">
+                    <div style="float: left;">
+                        <button onclick="showDisclaimer();return false;">Tuning File erstellen</button>
+                    </div>
+                    <div style="float: left;margin-left: 30px;">
+                        <label for="overwriteOriginal"><input type="checkbox" id="overwriteOriginal" name="overwriteOriginal" value="1" /> Auf original stehendes mit Original überschreiben</label>
+                    </div>
+                </div>
+                </form>
+                <iframe name="uploadFrame" style="width: 100%;border: none;display: none;"></iframe>
             </div>
-            <div id="tabs-2" class="tabContent">
+            <div id="tabs-2">
                 n/a
             </div>
             <div id="tabs-3" class="tabContent">
-                <h2>Versionsinfo</h2>
-                <p>web-tom Version 0.8.0</p>
-                
-                <h2>Über</h2>
+                <fieldset>
+                <img src="img/logo.png" style="float: left; margin-top: 15px;" />
+                <div style="float: left;margin-left: 10px;">
+                    <h2>Versionsinfo</h2>
+                    <p>
+                        WebTune-O-Matic, web-tom<br /><strong>Version <?=_VERSION?></strong><br /><br />
+                        Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a>
+                    </p>
+                </div>
+                </fieldset>
+                <h2 style="clear: left;">Über</h2>
                 <p>Der WebTune-O-Matic ist eine web-basierte Version des Tune-O-Matics von Thomas "2eck" Drechsler.</p>
                 <p>WebTOM benötigt die gleichen .2PF-Patchfiles, wie sie auch der Tune-O-Matic verwendet.
                 </p>
@@ -134,10 +206,6 @@
                 <p>
                     Mit dem Erstellen eines Tuningfiles und dem Akzeptieren des Haftungsausschluss, bestätigt der Benutzer
                     dieses Programms den oben genannten Verwendungszweck des erstellten Tuningfiles.
-                </p>
-                
-                <h2>Kontakt & Support</h2>
-                <p>Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a><br /><br /><br />&nbsp;
                 </p>
             </div>
         </div>

@@ -12,6 +12,21 @@ class Patcher {
     public function addModification(Modification $mod){
         array_push($this->_modifications, $mod);
     }
+    
+    /**
+     * @param string $filepath
+     * @return bool
+     */
+    public static function checkForScottyFile($filepath){
+    	$file = fopen($filepath, 'r');
+    	fseek($file, hexdec(_SCOTTY_OFFSET));
+    	$string = fread($file, 16);
+    	fclose($file);
+    	if($string == _SCOTTY_STRING){
+    		return true;
+    	}
+    	return false;
+    }
 
     /**
      * @param string $sourceFilePath

@@ -13,55 +13,21 @@
 require_once('../includes/bootstrap.php');
 chdir('..');
 
-$files = scandir(_DIRECTORY);
-//var_dump($files);
-foreach($files as $file){
-    if(strpos($file, '.2PF')===false)continue;
+$maps = PatchLocator::getMaps('R60_2005');
 
-    ob_start();
-    $mapIni = parse_ini_string(preg_replace("/\=(.+)\r/", "=\"$1\"\r", file_get_contents(_DIRECTORY.$file)), true);
-    $output = ob_get_clean();
-    ob_end_flush();
-
-    if(!$mapIni){
-        echo '<span style="color: red;">Failed loading '.$file.': '.$output.'</span><br />';
-        continue;
-    }
-
-    $map = new Map(str_replace('.2PF', '', $file));
+/* @var Map $map */
+foreach($maps as $map){
+    $settings = $map->getSettings();
     ?>
 <div class="singleMap"><label
-	for="setting[<?=$map->getAbbreviation()?>]"><?=htmlentities($mapIni[$map->getAbbreviation().'0'][_DESCRIPTION])?>:</label><select
+	for="setting[<?=$map->getAbbreviation()?>]"><?=htmlentities(reset($settings)->getDescription())?>:</label><select
 	name="setting[<?=$map->getAbbreviation()?>]">
 	<?php
 
-	foreach($mapIni as $sectionName => $section){
-	    switch($sectionName){
-	        case _RANGES:
-	            $rangesCount = $section[_RANGESCOUNT];
-	            for($i=1; $i <= $rangesCount; $i++){
-	                if(!array_key_exists('Range'.$i.'Start', $section) || !array_key_exists('Range'.$i.'End', $section)) {
-	                    throw new Exception('RangesCount differs from actual number of ranges');
-	                }
-	                $range = new Range($section['Range'.$i.'Start'], $section['Range'.$i.'End']);
-	                $map->addRange($range);
-	            }
-	            break;
-	        default:
-	            $setting = new Setting($sectionName, $section[_DESCRIPTION], $section[_LISTENTRY], array());
+	foreach($settings as $settingName => $setting){
 	            ?>
-            	<option value="<?=$sectionName?>"><?=htmlentities($section[_LISTENTRY])?></option>
+            	<option value="<?=$settingName?>"><?=htmlentities($setting->getListEntry())?></option>
             	<?php
-            	foreach($section as $key => $value){
-            	    if($key == _DESCRIPTION || $key == _LISTENTRY) continue;
-
-            	    $value = new Value($key, $value);
-            	    $setting->addValue($value);
-            	}
-
-            	$map->addSetting($setting);
-            	break;
-	    }
 	}
 	?>
 </select></div>

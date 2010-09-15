@@ -2,7 +2,10 @@
 require_once('autoload.php');
 require_once('parse_ini_string.php');
 
-define('_DIRECTORY', './R60_2005/');
+define('_DIRECTORY', './patches/tom/R60_2005/');
+
+define('_PATCHESDIR', './patches/tom/');
+define('_STATICPATCHESDIR', './patches/static/');
 
 define('_DESCRIPTION', 'Description');
 define('_LISTENTRY', 'ListEntry');

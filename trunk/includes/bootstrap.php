@@ -10,6 +10,8 @@ define('_STATICPATCHESDIR', './patches/static/');
 define('_DESCRIPTION', 'Description');
 define('_LISTENTRY', 'ListEntry');
 define('_RANGES', 'Ranges');
+define('_FEATURES', 'Features');
+define('_GROUP', 'Group');
 define('_RANGESCOUNT', 'RangesCount');
 
 define('_ORIGINALUPLOAD', 'upload/original/');

@@ -10,7 +10,7 @@ require_once('config.php');
 require_once('preset_mapping.php');
 require_once('parse_ini_string.php');
 
-define('_VERSION', '0.8.6');
+define('_VERSION', '0.8.9');
 
 define('_DIRECTORY', './patches/tom/R60_2005/');
 

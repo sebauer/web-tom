@@ -35,7 +35,7 @@ if($_FILES['source']['tmp_name'] == ''){
     copy($originalFile, $sourceFile);
 }
 
-if(Patcher::checkForScottyFile($sourceFile)){
+if(_SCOTTYCHECK==true && Patcher::checkForScottyFile($sourceFile)){
     jsCallback('Dies ist ein File von Scotty und ist nicht für Patches freigegeben!');
     die();
 }

@@ -1,3 +1,6 @@
+<?php
+    require_once('includes/bootstrap.php');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -26,13 +29,24 @@
                 $('#disclaimerDialog').dialog({
                     autoOpen: false,
                     minWidth: 450,
+                    resizable: false,
                     modal: true
                 });
                 $('#downloadDialog').dialog({
                     autoOpen: false,
+                    resizable: false,
                     modal: true,
                     minWidth: 450
                 });
+                <?php if(_DEBUG): ?>
+                    $('#debugDialog').dialog({
+                        autoOpen: true,
+                        modal: false,
+                        draggable: true,
+                        resizable: false,
+                        minWidth: 400
+                    });
+                <?php endif; ?>
                 $("button").button();
                 $("#downloadButton").button();
             });
@@ -89,7 +103,6 @@
                         </div>
                     </fieldset>
                     <?php
-                        require_once('includes/bootstrap.php');
                         
                         $mapGroups = PatchLocator::getMapsGrouped('R60_2005');
                         
@@ -143,7 +156,6 @@
                     </div>
                 </div>
                 </form>
-                <iframe name="uploadFrame" style="width: 100%;border: none;display: none;"></iframe>
             </div>
             <div id="tabs-2">
                 n/a
@@ -261,6 +273,9 @@
                 </button>
                 <!-- <strong>Downloadlink:</strong> <span id="downloadlink"></span> -->
             </p>
+        </div>
+        <div id="debugDialog" title="Debug Fenster">
+            <iframe name="uploadFrame" style="width: 100%;display: block;border: none;height: 200px;<?php if(!_DEBUG): ?>display: none;<?php endif; ?>"></iframe>
         </div>
     </body>
 </html>

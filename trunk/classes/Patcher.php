@@ -20,9 +20,10 @@ class Patcher {
     public static function checkForScottyFile($filepath){
     	$file = fopen($filepath, 'r');
     	fseek($file, hexdec(_SCOTTY_OFFSET));
-    	$string = fread($file, 16);
+    	$string = reset(unpack('H*', fread($file, 14)));
+    	var_dump($string);
     	fclose($file);
-    	if($string == _SCOTTY_STRING){
+    	if(strtolower($string) == strtolower(_SCOTTY_STRING.'')){
     		return true;
     	}
     	return false;

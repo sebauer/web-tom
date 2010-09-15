@@ -33,9 +33,15 @@ body {
 }
 
 #tabs select {
-    width: 150px;
+    width: 200px;
     border: 1px solid black;
-    margin-left: 50px;
+    margin-left: 10px;
+}
+
+#tabs input {
+    width: 200px;
+    border: 1px solid black;
+    margin-left: 10px;
 }
 
 option {
@@ -62,10 +68,11 @@ fieldset {
     margin: 5px;
 }
 
-input[type="file"] {
+#tabs input[type="file"] {
     color: white;
     background-color: black;
     border: none;
+    width: 240px;
 }
 
 #disclaimerDialog{
@@ -101,4 +108,7 @@ legend {
     z-index: 100;
     bottom: 0;
     left: 0;
+}
+#patchCreateFooter input {
+    width: 20px;
 }

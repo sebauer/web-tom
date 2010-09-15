@@ -18,6 +18,36 @@
         </div>
         <script type="text/javascript">
             window.filepath = '';
+
+            var presetMap = <?=json_encode(_PRESET_MAPPING())?>;
+
+            function updatePresetString(elem){
+				for(var i in presetMap){
+					if(elem.id==presetMap[i]){
+						var val = $('#presetvalue').val();
+						var presetValue = elem.value.replace(elem.id, '');
+						var newVal = val.substr(0, i) + presetValue + val.substr(parseInt(i)+parseInt(presetValue.length));
+						$('#presetvalue').val(newVal);
+					}
+				}
+            }
+
+			function applyPresetValue(){
+				var val = $('#presetvalue').val();
+				if(val.length != presetMap.length){
+					alert('Der Preset String passt nicht zum aktuellen Satz an Patches!');
+					return;
+				}
+				for(var i in presetMap){
+					var valElem = $('#'+presetMap[i]+val.substr(i,1));
+					var setValue = val.substr(i,1);
+					if(valElem.length == 0){
+						alert('Der Wert "'+setValue+'" für Patch '+presetMap[i]+' existiert nicht. Es wird stattdessen der Original Patch mit der ID 0 verwendet!');
+					}
+					$('#'+presetMap[i]).val(presetMap[i]+setValue);
+				}
+			}
+            
             $(function(){
                 $("#tabs").tabs({
                     ajaxOptions: {
@@ -102,6 +132,13 @@
                             <label for="source">Datei zum Patchen (Basis 371568):<br /><span class="labelInfo">Wenn leergelassen, wird Originaldatei verwendet.</span></label><input type="file" name="source" />
                         </div>
                     </fieldset>
+                    <fieldset>
+                        <legend>Preset</legend>
+                        <div class="singleMap">
+                            <label for="presetvalue">Aktueller Preset-String:<br /><span class="labelInfo">Ändern des Strings ändert auch die aktuelle Zusammenstellung!</span></label>
+                            <input type="text" name="presetvalue" id="presetvalue" onchange="applyPresetValue();" value="<?=str_pad('', count(PatchLocator::getMaps('R60_2005')), '0')?>" />
+                        </div>
+                    </fieldset>
                     <?php
                         
                         $mapGroups = PatchLocator::getMapsGrouped('R60_2005');
@@ -123,12 +160,12 @@
                             $settings = $map->getSettings();
                             ?>
                         <div class="singleMap"><label
-                            for="setting[<?=$map->getAbbreviation()?>]"><?=htmlentities(reset($settings)->getDescription())?>:</label><select
-                            name="setting[<?=$map->getAbbreviation()?>]">
+                            for="setting[<?=$map->getAbbreviation()?>]"><?=htmlentities(reset($settings)->getDescription())?>:</label><select onchange="updatePresetString(this);"
+                            name="setting[<?=$map->getAbbreviation()?>]" id="<?=$map->getAbbreviation()?>">
                             <?php
                                 foreach($settings as $settingName => $setting){
                                             ?>
-                                            <option value="<?=$settingName?>"><?=htmlentities($setting->getListEntry())?></option>
+                                            <option value="<?=$settingName?>" id="<?=$settingName?>"><?=htmlentities($setting->getListEntry())?></option>
                                             <?php
                                 }
                             ?>

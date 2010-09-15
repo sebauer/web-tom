@@ -43,19 +43,26 @@ class Setting {
     }
 
     /**
+     * @return Value[]
+     */
+    public function getValues(){
+        return $this->_values;
+    }
+
+    /**
      * @return string
      */
     public function getKey(){
         return $this->_key;
     }
-    
+
     /**
      * @return string
      */
     public function getDescription(){
     	return $this->_description;
     }
-    
+
     /**
      * @return string
      */

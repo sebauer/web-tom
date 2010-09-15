@@ -45,6 +45,13 @@ class Map {
     }
 
     /**
+     * @return Setting[]
+     */
+    public function getSettings(){
+        return $this->_settings;
+    }
+
+    /**
      * @param Range $range
      * @return void
      */

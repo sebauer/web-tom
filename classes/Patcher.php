@@ -81,7 +81,7 @@ class Patcher {
             for($offset = $rangeStart; $offset <= $rangeEnd; $offset++){
 
             	// Hex represantation of our decimal offset
-                $hexOffset = dechex($offset);
+                $hexOffset = str_pad(dechex($offset), 5, '0', STR_PAD_LEFT);
 
                 // Seek to offset position
                 fseek($this->_patchedFile, $offset);
@@ -89,7 +89,7 @@ class Patcher {
                 // Check if the setting contains a value for this position
                 if($setting->hasValueAtOffset($hexOffset)){
                 	$value = $setting->getValue($hexOffset);
-                    fwrite($this->_patchedFile, pack('H*', $setting->getValue($hexOffset)->getValue()));
+                    fwrite($this->_patchedFile, pack('H*', $value->getValue()));
                     continue;
                 }
                 // Setting does not contain a value for this position, so

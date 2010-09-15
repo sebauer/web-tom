@@ -10,9 +10,11 @@ require_once('config.php');
 require_once('preset_mapping.php');
 require_once('parse_ini_string.php');
 
-define('_VERSION', '0.8.9');
+define('_VERSION', '0.8.10');
 
 define('_DIRECTORY', './patches/tom/R60_2005/');
+
+define('_ORIGINAL_MD5', '2e63a949d99dc19f62c36b43cb28d94e');
 
 define('_PATCHESDIR', './patches/tom/');
 define('_STATICPATCHESDIR', './patches/static/');

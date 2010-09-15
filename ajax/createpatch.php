@@ -31,6 +31,11 @@ if(!move_uploaded_file($_FILES['original']['tmp_name'], $originalFile) || $_FILE
     die();
 }
 
+if(md5_file($originalFile)!=_ORIGINAL_MD5){
+    jsCallback('Die hochgeladene Originaldatei entspricht keiner gültigen Version 371568!');
+    die();
+}
+
 if($_FILES['source']['tmp_name'] == ''){
     copy($originalFile, $sourceFile);
 }

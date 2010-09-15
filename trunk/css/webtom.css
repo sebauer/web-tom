@@ -78,3 +78,12 @@ input[type="checkbox"] {
 legend {
     color: #aaaaaa;
 }
+#downloadLabel {
+    font-size: 18px;
+}
+#downloadSub {
+    font-size: 10px;
+}
+#downloadButton {
+    text-align: left;
+}

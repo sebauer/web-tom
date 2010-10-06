@@ -47,7 +47,7 @@
 					$('#'+presetMap[i]).val(presetMap[i]+setValue);
 				}
 			}
-            
+
             $(function(){
                 $("#tabs").tabs({
                     ajaxOptions: {
@@ -80,16 +80,16 @@
                 $("button").button();
                 $("#downloadButton").button();
             });
-            
+
             var uploadCallback = function(message, isError){
                 if (isError == 1) {
                     alert('ERROR: ' + message);
                 } else {
                     alert(message);
                 }
-                
+
             }
-            
+
             var showDownloadInfo = function(filepath, filename, md5){
 //                alert(filepath+';'+filename+';'+md5);
                 window.filepath = filepath;
@@ -100,7 +100,7 @@
                 $('#downloadButton').blur();
                 $('#downloadButton').button('refesh');
             }
-            
+
             var showDisclaimer = function(){
                 $('#disclaimerDialog').dialog('open');
                 $('#acceptButton').blur();
@@ -113,6 +113,9 @@
             <ul>
                 <li>
                     <a href="#tabs-1">File Patcher</a>
+                </li>
+                <li>
+                    <a href="#tabs-eeprom">EEPROM Analyzer</a>
                 </li>
                 <li>
                     <a href="#tabs-2">Patch Creator</a>
@@ -140,9 +143,9 @@
                         </div>
                     </fieldset>
                     <?php
-                        
+
                         $mapGroups = PatchLocator::getMapsGrouped('R60_2005');
-                        
+
                         /* @var Map $map */
                         foreach($mapGroups as $groupname => $maps){
                     ?>
@@ -177,14 +180,14 @@
                     </fieldset>
                     <?php
                 }
-                
+
                 ?>
                 <script type="text/javascript">
                     $(function() {
                         $("button").button();
                     });
                 </script>
-                <div id="patchCreateFooter">
+                <div id="buttonFooter" class="buttonFooter">
                     <div style="float: left;">
                         <button onclick="showDisclaimer();return false;">Tuning File erstellen</button>
                     </div>
@@ -196,6 +199,19 @@
             </div>
             <div id="tabs-2">
                 n/a
+            </div>
+            <div id="tabs-eeprom" class="tabContent">
+                <form enctype="multipart/form-data" method="post" action="ajax/analyzeeeprom.php" id="eepromAnalyzerForm" target="uploadFrame">
+                    <fieldset>
+                        <legend>Quelldatei</legend>
+                        <div class="singleMap">
+                            <label for="eeprom">EEPROM Dump:</label><input type="file" name="eeprom" />
+                        </div>
+                    </fieldset>
+                    <div class="buttonFooter">
+                        <button>EEPROM Dump analysieren</button>
+                    </div>
+                </form>
             </div>
             <div id="tabs-3" class="tabContent">
                 <fieldset>
@@ -221,9 +237,9 @@
                     <strong>WARNUNG:</strong> Auch wenn - oder gerade weil - der WebTOM eine einfache "Klickibunti"
                     Oberfläche ist, um Tuningfiles zusammenzubauen, sollte der Benutzer ganz genau wissen, was er da
                     tut. Es gibt keine Plausibilitätsprüfung, welche unterschiedlichste Kennfeldkombinationen auf
-                    deren garantierte Kompatibilität prüft. 
+                    deren garantierte Kompatibilität prüft.
                 </p>
-                
+
                 <h2>Haftungsausschluss</h2>
                 <p>
                     <strong>WARNUNG:</strong> Das erstellte Tuningfile hat keine korrekten Checksummen!

@@ -9,8 +9,9 @@ require_once('autoload.php');
 require_once('config.php');
 require_once('preset_mapping.php');
 require_once('parse_ini_string.php');
+require_once('ajax_functions.php');
 
-define('_VERSION', '0.8.10');
+define('_VERSION', '0.9.0');
 
 define('_DIRECTORY', './patches/tom/R60_2005/');
 
@@ -25,6 +26,8 @@ define('_RANGES', 'Ranges');
 define('_FEATURES', 'Features');
 define('_GROUP', 'Group');
 define('_RANGESCOUNT', 'RangesCount');
+
+define('_EEPROM_SIZE', 256);
 
 define('_SCOTTY_OFFSET', '1C3A8');
 define('_SCOTTY_STRING', 'CA0079006100CA009401A100CA00');

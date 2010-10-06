@@ -10,14 +10,6 @@ echo "</pre>";
 require_once('../includes/bootstrap.php');
 chdir('..');
 
-function jsCallback($message, $isError = 'false'){
-    echo "<script>window.parent.uploadCallback(\"{$message}\", {$isError});</script>";
-}
-
-function downloadFile($filepath, $filename, $md5){
-    echo "<script>window.parent.showDownloadInfo(\"{$filepath}\", \"{$filename}\", \"{$md5}\");</script>";
-}
-
 if($_FILES['original']['tmp_name'] == ''){
     jsCallback('Es wurde keine Originaldatei mit hochgeladen!', true);
     die();

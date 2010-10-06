@@ -101,7 +101,7 @@ legend {
     text-align: left;
 }
 
-#patchCreateFooter {
+.buttonFooter {
     position: absolute;
     padding-bottom: 10px;
     padding-left: 20px;
@@ -109,6 +109,6 @@ legend {
     bottom: 0;
     left: 0;
 }
-#patchCreateFooter input {
+#tabs .buttonFooter input[type="checkbox"] {
     width: 20px;
 }

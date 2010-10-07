@@ -90,6 +90,12 @@
 
             }
 
+            var analyzerCallback = function(output){
+                alert(output);
+            	$("#analyticalOutput").html(unescape(output));
+            	$("#analyticalOutput").show();
+            }
+
             var showDownloadInfo = function(filepath, filename, md5){
 //                alert(filepath+';'+filename+';'+md5);
                 window.filepath = filepath;
@@ -212,6 +218,8 @@
                         <button>EEPROM Dump analysieren</button>
                     </div>
                 </form>
+                <fieldset id="analyticalOutput" style="display: none;">
+                </fieldset>
             </div>
             <div id="tabs-3" class="tabContent">
                 <fieldset>

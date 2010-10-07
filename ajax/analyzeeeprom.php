@@ -27,7 +27,7 @@ if(filesize($eeprom)!=_EEPROM_SIZE){
     die();
 }
 
-$output = '';
+$output = '<dl>';
 
 // DO ANALYITCAL STUFF
 $byteDefinitions = array(
@@ -162,14 +162,23 @@ foreach( $byteDefinitions as $name => $pos ) {
                 <dt>SCN Codierung:</dt>
                 <dd>$scnString</dd>";
             break;
+        case "side":
+            $output .= "
+            <dt>Fahrzeugaufbau</dt>
+            <dd>".$valueList[$name][$value]."</dd>";
+            break;
         default:
             $output .= "
             <dt>$name</dt>
-            <dd>$value</dd>";
+            <dd>".$valueList[$name][$value]."</dd>";
             break;
     }
 }
+$output .= '</dl>';
+echo "<div id='analysisOutput'>";
 echo $output;
+echo "</div>";
+analyzerCallback();
 //analyzerCallback(htmlentities($output));
 
 function getBinaryString($value){

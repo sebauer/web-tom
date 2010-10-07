@@ -90,9 +90,8 @@
 
             }
 
-            var analyzerCallback = function(output){
-                alert(output);
-            	$("#analyticalOutput").html(unescape(output));
+            var analyzerCallback = function(){
+            	$("#analyticalOutput").html(document.getElementById('uploadFrame').contentDocument.getElementById("analysisOutput").innerHTML);
             	$("#analyticalOutput").show();
             }
 
@@ -336,7 +335,7 @@
             </p>
         </div>
         <div id="debugDialog" title="Debug Fenster">
-            <iframe name="uploadFrame" style="width: 100%;display: block;border: none;height: 200px;<?php if(!_DEBUG): ?>display: none;<?php endif; ?>"></iframe>
+            <iframe id="uploadFrame" name="uploadFrame" style="width: 100%;display: block;border: none;height: 200px;<?php if(!_DEBUG): ?>display: none;<?php endif; ?>"></iframe>
         </div>
     </body>
 </html>

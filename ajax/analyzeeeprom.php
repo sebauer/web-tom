@@ -27,17 +27,17 @@ if(filesize($eeprom)!=_EEPROM_SIZE){
     die();
 }
 
+$output = '';
+
 // DO ANALYITCAL STUFF
-
-$content = file_get_contents($eeprom);
-
 $byteDefinitions = array(
     "model" =>  array( "35", "37" ),
     "type"  =>  array( "38", "3A" ),
+    "side"  =>  array( "3B", "3B" ),
     "FIN"   =>  array( "32", "42" ),
     "writes"    =>  array("F2", "F2"),
-    "writes_sc" =>  array("F3", "F3"),
-    "features"  =>  array("7", "7")
+    "scn"    =>  array("05", "06"),
+    "features"  =>  array('07', '07')
 );
 
 $valueList = array(
@@ -46,12 +46,16 @@ $valueList = array(
         "450"   =>  "Smart ForTwo"
     ),
     "type"  =>  array(
-        "332"   =>  "Coupé, 45kW",
-        "334"   =>  "Coupé, 60kW",
-        "337"   =>  "Coupé, Brabus, 74kW",
-        "434"   =>  "Roadster, 60kW",
-        "432"   =>  "Roadster, 45kW",
-        "437"   =>  "Roadster Brabus, 74kW"
+        "332"   =>  " Coupé, 45kW",
+        "334"   =>  " Coupé, 60kW",
+        "337"   =>  " Coupé, 74kW (Brabus)",
+        "434"   =>  "60kW",
+        "432"   =>  "45kW",
+        "437"   =>  "74kW (Brabus)"
+    ),
+    "side"  =>  array(
+        "1" => "Linkslenker",
+        "2" => "Rechtslenker"
     ),
     "features"  =>  array(
         "Smart",
@@ -62,18 +66,114 @@ $valueList = array(
         "unbekannt (Bit6)",
         "ohne Klimaanlage",
         "unbekannt (Bit8)"
+    ),
+    "scn0"  =>  array(
+        "",
+        "SCN5: ??? (Bit 2)",
+        "",
+        "",
+        "",
+        "SCN5: ohne Klima (Bit 6)",
+        "SCN5: SB2 (Bit 7)",
+        "SCN5: Roadster (Bit 8)"
+    ),
+    "scn1"  =>  array(
+        "",
+        "",
+        "",
+        "SCN6: 45kW (Bit 4)",
+        "SCN6: 60kW (Bit 5)",
+        "",
+        "SCN6: 74kW (Bit 7)",
+        ""
     )
 );
 
-$value = decbin(ord(substr($content, 7, 1)));
-$resultsArray = array();
+$sEeprom = fopen($eeprom, 'r');
 
-for($i=1;$i<strlen($value);$i++){
-    if($value[$i]=='1'){
-        $resultsArray[] = $valueList['features'][$i];
+$model = '';
+foreach( $byteDefinitions as $name => $pos ) {
+
+    $start = hexdec($pos[0]);
+    $end = hexdec($pos[1]);
+    $length = ($end-$start)+1;
+
+    fseek($sEeprom, $start);
+    $value = fread($sEeprom, $length);
+    switch( $name ) {
+        case "model":
+            $model = $valueList["model"][$value];
+            break;
+        case "type":
+            $output .= "
+            <dt>Modell</dt>
+            <dd>$model ".$valueList["type"][$value]."</dd>";
+            break;
+        case "FIN":
+            $output .= "
+            <dt>FIN</dt>
+            <dd>$value</dd>";
+            break;
+        case "writes":
+            fseek($sEeprom, hexdec('ED'));
+            $ed = fread($sEeprom, 1);
+            $ed = ord($ed);
+            if($ed == hexdec("FF")){
+                $output .= "
+                    <dt>MEG Flashes (Tuningfiles)</dt>
+                    <dd>".ord($value)."</dd>";
+            } else {
+                $output .= "
+                    <dt>MEG Flashes (sC)</dt>
+                    <dd>".ord($value)." ".ord($ed).")</dd>";
+            }
+            break;
+        case "features":
+            $value = getBinaryString($value);
+            $featuresArray = array_reverse($valueList['features']);
+            $resultsArray = array();
+
+            for($i=0;$i<strlen($value);$i++){
+                if($value[$i]=='1'){
+                    $resultsArray[] = $featuresArray[$i];
+                }
+            }
+            $featureString = implode(', ', $resultsArray);
+            $output .= "
+                <dt>Features:</dt>
+                <dd>$featureString</dd>";
+            break;
+        case "scn":
+            $scnBytes = str_split($value, 1);
+
+            $scnArray = array();
+
+            foreach($scnBytes as $offset => $scnByte){
+                $scnByte = getBinaryString($scnByte);
+                $scnValueList = array_reverse($valueList['scn'.$offset]);
+                for($i=0;$i<strlen($scnByte);$i++){
+                    if($scnByte[$i]=='1'){
+                        $scnArray[] = $scnValueList[$i];
+                    }
+                }
+            }
+            $scnString = implode('<br />', $scnArray);
+            $output .= "
+                <dt>SCN Codierung:</dt>
+                <dd>$scnString</dd>";
+            break;
+        default:
+            $output .= "
+            <dt>$name</dt>
+            <dd>$value</dd>";
+            break;
     }
 }
-$featureString = implode(', ', $resultsArray);
+echo $output;
+//analyzerCallback(htmlentities($output));
 
+function getBinaryString($value){
+    return str_pad(decbin(hexdec(reset(unpack('H*', $value)))), 8, '0', STR_PAD_LEFT);
+}
 
 ?>

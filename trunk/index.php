@@ -91,7 +91,7 @@
             }
 
             var analyzerCallback = function(){
-            	$("#analyticalOutput").html(document.getElementById('uploadFrame').contentDocument.getElementById("analysisOutput").innerHTML);
+            	$("#eepromOutput").html(document.getElementById('uploadFrame').contentDocument.getElementById("analysisOutput").innerHTML);
             	$("#analyticalOutput").show();
             }
 
@@ -218,6 +218,9 @@
                     </div>
                 </form>
                 <fieldset id="analyticalOutput" style="display: none;">
+                    <legend>Ausgabe</legend>
+                    <div id="eepromOutput">
+                    </div>
                 </fieldset>
             </div>
             <div id="tabs-3" class="tabContent">
@@ -227,7 +230,9 @@
                     <h2>Versionsinfo</h2>
                     <p>
                         WebTune-O-Matic, web-tom<br /><strong>Version <?=_VERSION?> (Rev. <?=_REVISION?>)</strong><br /><br />
-                        Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a>
+                        Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a><br />
+                        <br />
+                        Besonderer Dank gehen an Thomas "2Eck" Drechsler und LiZZard
                     </p>
                 </div>
                 </fieldset>

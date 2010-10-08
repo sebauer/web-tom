@@ -112,3 +112,18 @@ legend {
 #tabs .buttonFooter input[type="checkbox"] {
     width: 20px;
 }
+
+dl {
+    margin-left: 20px;
+}
+dt {
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
+    width: 200px;
+    clear: left;
+}
+dd {
+    float:left;
+    margin-bottom: 10px;
+}

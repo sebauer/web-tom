@@ -19,7 +19,7 @@
         <script type="text/javascript">
             window.filepath = '';
 
-            var presetMap = <?=json_encode(_PRESET_MAPPING())?>;
+            var presetMap = <?php echo json_encode(_PRESET_MAPPING())?>;
 
             function updatePresetString(elem){
 				for(var i in presetMap){
@@ -144,7 +144,7 @@
                         <legend>Preset</legend>
                         <div class="singleMap">
                             <label for="presetvalue">Aktueller Preset-String:<br /><span class="labelInfo">Ändern des Strings ändert auch die aktuelle Zusammenstellung!</span></label>
-                            <input type="text" name="presetvalue" id="presetvalue" onchange="applyPresetValue();" value="<?=str_pad('', count(PatchLocator::getMaps('R60_2005')), '0')?>" />
+                            <input type="text" name="presetvalue" id="presetvalue" onchange="applyPresetValue();" value="<?php echo str_pad('', count(PatchLocator::getMaps('R60_2005')), '0')?>" />
                         </div>
                     </fieldset>
                     <?php
@@ -159,7 +159,7 @@
                         $groupname = htmlentities($groupname);
                         if($groupname != 'none'){
                            ?>
-                            <legend><?=$groupname?></legend>
+                            <legend><?php echo $groupname; ?></legend>
                            <?php
                         }
                     ?>
@@ -168,12 +168,12 @@
                             $settings = $map->getSettings();
                             ?>
                         <div class="singleMap"><label
-                            for="setting[<?=$map->getAbbreviation()?>]"><?=htmlentities(reset($settings)->getDescription())?>:</label><select onchange="updatePresetString(this);"
-                            name="setting[<?=$map->getAbbreviation()?>]" id="<?=$map->getAbbreviation()?>">
+                            for="setting[<?php echo $map->getAbbreviation()?>]"><?php echo htmlentities(reset($settings)->getDescription())?>:</label><select onchange="updatePresetString(this);"
+                            name="setting[<?php echo $map->getAbbreviation()?>]" id="<?php echo $map->getAbbreviation()?>">
                             <?php
                                 foreach($settings as $settingName => $setting){
                                             ?>
-                                            <option value="<?=$settingName?>" id="<?=$settingName?>"><?=htmlentities($setting->getListEntry())?></option>
+                                            <option value="<?php echo $settingName ?>" id="<?php echo $settingName; ?>"><?php echo htmlentities($setting->getListEntry())?></option>
                                             <?php
                                 }
                             ?>
@@ -229,7 +229,7 @@
                 <div style="float: left;margin-left: 10px;">
                     <h2>Versionsinfo</h2>
                     <p>
-                        WebTune-O-Matic, web-tom<br /><strong>Version <?=_VERSION?> (Rev. <?=_REVISION?>)</strong><br /><br />
+                        WebTune-O-Matic, web-tom<br /><strong>Version <?php echo _VERSION; ?> (Rev. <?php echo _REVISION; ?>)</strong><br /><br />
                         Projektseite: <a href="http://code.google.com/p/web-tom/" target="_blank">http://code.google.com/p/web-tom/</a><br />
                         <br />
                         Besonderer Dank gehen an Thomas "2Eck" Drechsler und LiZZard
